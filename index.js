@@ -37,3 +37,59 @@
 //    - Hash tables require more complex implementation and may introduce bugs if not done correctly.
 
 // Our next data structure is Linked Lists
+
+// Why are Linked Lists good?
+// Essentially you can inset and delete without shifting everything else
+// Insertion requires an index to shift in Arrays but not in LL's
+// Doing all that shifting costs us O(n)
+// Linked lists traverse kind of like iteration
+// Linked lists are scattered all over in memory
+// However inserts are still better in LL's
+// The one advantage of LL's over HT is it's sorted
+
+// Linked List operations
+
+// prepend O(1)
+// append O(1)
+// look up O(n) Traversal start at head and look for what we want
+// insert O(n) 
+// delete O(n) 
+
+// Insert and Delete in Arrays are also O(n)...so why LL's???
+
+// First Linked List
+
+// 10-->5-->16
+
+// let myLinkedList = {
+//     head: {
+//         value: 10,
+//         next: {
+//             value: 5,
+//             next: {
+//                 value: 16,
+//                 next: null
+//             }
+//         }
+//     }
+// }
+
+    // think of this node as a container or bucket around your data
+    // value of the node can always change but the pointer...
+    // always points to the next object
+    // the final next is the tail and must point to null
+
+
+class LinkedList {
+    constructor(value) {
+        this.head = {
+            value: value,
+            next: null
+        }
+        this.tail = this.head;
+        this.length = 1;
+    }
+}
+
+const myLinkedList = new LinkedList(10)
+console.log(myLinkedList)
