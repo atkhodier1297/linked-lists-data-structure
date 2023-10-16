@@ -52,8 +52,8 @@
 // prepend O(1)
 // append O(1)
 // look up O(n) Traversal start at head and look for what we want
-// insert O(n) 
-// delete O(n) 
+// insert O(n)
+// delete O(n)
 
 // Insert and Delete in Arrays are also O(n)...so why LL's???
 
@@ -74,22 +74,33 @@
 //     }
 // }
 
-    // think of this node as a container or bucket around your data
-    // value of the node can always change but the pointer...
-    // always points to the next object
-    // the final next is the tail and must point to null
-
+// think of this node as a container or bucket around your data
+// value of the node can always change but the pointer...
+// always points to the next object
+// the final next is the tail and must point to null
 
 class LinkedList {
-    constructor(value) {
-        this.head = {
-            value: value,
-            next: null
-        }
-        this.tail = this.head;
-        this.length = 1;
-    }
+  constructor(value) {
+    this.head = {
+      value: value,
+      next: null,
+    };
+    this.tail = this.head;
+    this.length = 1;
+  }
+  append(value) {
+    const newNode = {
+      value: value,
+      next: null,
+    };
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
 }
 
-const myLinkedList = new LinkedList(10)
-console.log(myLinkedList)
+const myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);
+console.log(myLinkedList);
