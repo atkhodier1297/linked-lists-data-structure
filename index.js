@@ -96,32 +96,57 @@ class LinkedList {
     this.length = 1;
   }
   append(value) {
+    // O(1)
     // const newNode = {
     //   value: value,
     //   next: null,
     // };
-    const newNode = new Node(value)
+    const newNode = new Node(value);
     this.tail.next = newNode;
     this.tail = newNode;
     this.length++;
     return this;
   }
+  // O(1)
   prepend(value) {
     // const newNode = {
     //   value: value,
     //   next: null
     // };
-    const newNode = new Node(value)
-    newNode.next = this.head
+    const newNode = new Node(value);
+    newNode.next = this.head;
     this.head = newNode;
     this.length++;
     return this;
   }
-
+  insert(index, value) {
+    // check parameters
+    if (index >= this.length) {
+      return this.append(value);
+    }
+    const newNode = new Node(value);
+    // traverse our list to find the insert node
+    const leader = this.traverseToIndex(index - 1);
+    const holdingPointer = leader.next;
+    leader.next = newNode
+    newNode.next = holdingPointer
+    this.length++
+    return this
+  }
+  traverseToIndex(index) {
+    let counter = 0;
+    let currentNode = this.head;
+    while (counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
 }
 
-const myLinkedList = new LinkedList(10);
-myLinkedList.append(5);
-myLinkedList.append(16);
-myLinkedList.prepend(900)
+const myLinkedList = new LinkedList(100);
+myLinkedList.append(200);
+myLinkedList.append(300);
+myLinkedList.prepend(400);
+myLinkedList.insert(2,500)
 console.log(myLinkedList);
