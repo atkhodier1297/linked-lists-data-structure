@@ -128,10 +128,10 @@ class LinkedList {
     // traverse our list to find the insert node
     const leader = this.traverseToIndex(index - 1);
     const holdingPointer = leader.next;
-    leader.next = newNode
-    newNode.next = holdingPointer
-    this.length++
-    return this
+    leader.next = newNode;
+    newNode.next = holdingPointer;
+    this.length++;
+    return this;
   }
   traverseToIndex(index) {
     let counter = 0;
@@ -142,11 +142,19 @@ class LinkedList {
     }
     return currentNode;
   }
+  remove(index) {
+    const leader = this.traverseToIndex(index - 1);
+    const unwantedNode = leader.next;
+    leader.next = unwantedNode.next;
+    this.length--;
+    return this;
+  }
 }
 
 const myLinkedList = new LinkedList(100);
 myLinkedList.append(200);
 myLinkedList.append(300);
 myLinkedList.prepend(400);
-myLinkedList.insert(2,500)
+myLinkedList.insert(2, 500);
+myLinkedList.remove(2)
 console.log(myLinkedList);
