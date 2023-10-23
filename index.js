@@ -119,6 +119,15 @@ class LinkedList {
     this.length++;
     return this;
   }
+  printList() {
+    const array = [];
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      array.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return array;
+  }
   insert(index, value) {
     // check parameters
     if (index >= this.length) {
@@ -156,5 +165,5 @@ myLinkedList.append(200);
 myLinkedList.append(300);
 myLinkedList.prepend(400);
 myLinkedList.insert(2, 500);
-myLinkedList.remove(2)
+myLinkedList.remove(2);
 console.log(myLinkedList);
