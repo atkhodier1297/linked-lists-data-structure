@@ -166,7 +166,7 @@ myLinkedList.append(300);
 myLinkedList.prepend(400);
 myLinkedList.insert(2, 500);
 myLinkedList.remove(2);
-console.log(myLinkedList.printList());
+//console.log(myLinkedList.printList());
 
 // Doubly Linked Lists allow us to traverse backwards
 // You can start from the end and go backwards
@@ -175,11 +175,20 @@ console.log(myLinkedList.printList());
 // Lookup is still O(n) but technically its O(n/2)
 // Simplified it's still O(n) but its actually faster
 
+class DoublyNode {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
 class DoublyLinkedList {
   constructor(value) {
     this.head = {
       value: value,
       next: null,
+      prev: null,
     };
     this.tail = this.head;
     this.length = 1;
@@ -190,7 +199,8 @@ class DoublyLinkedList {
     //   value: value,
     //   next: null,
     // };
-    const newNode = new Node(value);
+    const newNode = new DoublyNode(value);
+    this.tail.prev = newNode
     this.tail.next = newNode;
     this.tail = newNode;
     this.length++;
@@ -202,7 +212,7 @@ class DoublyLinkedList {
     //   value: value,
     //   next: null
     // };
-    const newNode = new Node(value);
+    const newNode = new DoublyNode(value);
     newNode.next = this.head;
     this.head = newNode;
     this.length++;
@@ -222,7 +232,7 @@ class DoublyLinkedList {
     if (index >= this.length) {
       return this.append(value);
     }
-    const newNode = new Node(value);
+    const newNode = new DoublyNode(value);
     // traverse our list to find the insert node
     const leader = this.traverseToIndex(index - 1);
     const holdingPointer = leader.next;
@@ -252,7 +262,8 @@ class DoublyLinkedList {
 const myDoublyLinkedList = new DoublyLinkedList(100);
 myDoublyLinkedList.append(200);
 myDoublyLinkedList.append(300);
-myDoublyLinkedList.prepend(400);
-myDoublyLinkedList.insert(2, 500);
-myDoublyLinkedList.remove(2);
+// myDoublyLinkedList.prepend(400);
+// myDoublyLinkedList.insert(2, 500);
+// myDoublyLinkedList.remove(2);
 console.log(myDoublyLinkedList.printList());
+console.log(myDoublyLinkedList)
