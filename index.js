@@ -194,13 +194,8 @@ class DoublyLinkedList {
     this.length = 1;
   }
   append(value) {
-    // O(1)
-    // const newNode = {
-    //   value: value,
-    //   next: null,
-    // };
     const newNode = new DoublyNode(value);
-    this.tail.prev = newNode;
+    newNode.prev = this.tail;
     this.tail.next = newNode;
     this.tail = newNode;
     this.length++;
@@ -208,17 +203,13 @@ class DoublyLinkedList {
   }
   // O(1)
   prepend(value) {
-    // const newNode = {
-    //   value: value,
-    //   next: null
-    // };
     const newNode = new DoublyNode(value);
     newNode.next = this.head;
     this.head.prev = newNode;
     this.head = newNode;
     this.length++;
     return this;
-  }
+  }  
   printList() {
     const array = [];
     let currentNode = this.head;
@@ -255,12 +246,34 @@ class DoublyLinkedList {
     return currentNode;
   }
   remove(index) {
-    const leader = this.traverseToIndex(index - 1);
-    const unwantedNode = leader.next;
-    leader.next = unwantedNode.next;
+    if (index < 0 || index >= this.length) {
+      return null; // Invalid index
+    }
+  
+    const nodeToRemove = this.traverseToIndex(index);
+  
+    if (nodeToRemove.prev) {
+      nodeToRemove.prev.next = nodeToRemove.next;
+    } else {
+      this.head = nodeToRemove.next;
+      if (this.head) {
+        this.head.prev = null;
+      } else {
+        this.tail = null;
+      }
+    }
+  
+    if (nodeToRemove.next) {
+      nodeToRemove.next.prev = nodeToRemove.prev;
+    } else {
+      this.tail = nodeToRemove.prev;
+    }
+  
     this.length--;
+  
     return this.printList();
   }
+  
 }
 
 const myDoublyLinkedList = new DoublyLinkedList(100);
@@ -268,6 +281,6 @@ myDoublyLinkedList.append(200);
 myDoublyLinkedList.append(300);
 myDoublyLinkedList.prepend(400);
 myDoublyLinkedList.insert(2, 500);
-// myDoublyLinkedList.remove(2);
+myDoublyLinkedList.remove(2);
 console.log(myDoublyLinkedList.printList());
 console.log(myDoublyLinkedList);
