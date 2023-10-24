@@ -200,7 +200,7 @@ class DoublyLinkedList {
     //   next: null,
     // };
     const newNode = new DoublyNode(value);
-    this.tail.prev = newNode
+    this.tail.prev = newNode;
     this.tail.next = newNode;
     this.tail = newNode;
     this.length++;
@@ -214,6 +214,7 @@ class DoublyLinkedList {
     // };
     const newNode = new DoublyNode(value);
     newNode.next = this.head;
+    this.head.prev = newNode;
     this.head = newNode;
     this.length++;
     return this;
@@ -235,10 +236,13 @@ class DoublyLinkedList {
     const newNode = new DoublyNode(value);
     // traverse our list to find the insert node
     const leader = this.traverseToIndex(index - 1);
-    const holdingPointer = leader.next;
+    const follower = leader.next;
     leader.next = newNode;
-    newNode.next = holdingPointer;
+    newNode.prev = leader;
+    newNode.next = follower;
+    follower.prev = newNode;
     this.length++;
+    //console.log(this)
     return this;
   }
   traverseToIndex(index) {
@@ -262,8 +266,8 @@ class DoublyLinkedList {
 const myDoublyLinkedList = new DoublyLinkedList(100);
 myDoublyLinkedList.append(200);
 myDoublyLinkedList.append(300);
-// myDoublyLinkedList.prepend(400);
-// myDoublyLinkedList.insert(2, 500);
+myDoublyLinkedList.prepend(400);
+myDoublyLinkedList.insert(2, 500);
 // myDoublyLinkedList.remove(2);
 console.log(myDoublyLinkedList.printList());
-console.log(myDoublyLinkedList)
+console.log(myDoublyLinkedList);
