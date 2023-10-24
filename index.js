@@ -158,6 +158,22 @@ class LinkedList {
     this.length--;
     return this.printList();
   }
+  reverse() {
+    if (!this.head.next) {
+      return this.head;
+    }
+    let first = this.head;
+    this.tail = this.head
+    let second = first.next;
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+    this.head.next = null
+    this.head = first
+  }
 }
 
 const myLinkedList = new LinkedList(100);
@@ -166,7 +182,8 @@ myLinkedList.append(300);
 myLinkedList.prepend(400);
 myLinkedList.insert(2, 500);
 myLinkedList.remove(2);
-//console.log(myLinkedList.printList());
+myLinkedList.reverse()
+console.log(myLinkedList.printList());
 
 // Doubly Linked Lists allow us to traverse backwards
 // You can start from the end and go backwards
@@ -174,6 +191,9 @@ myLinkedList.remove(2);
 // Because now you can pick where to start and go backwards
 // Lookup is still O(n) but technically its O(n/2)
 // Simplified it's still O(n) but its actually faster
+// singly is still faster for insertion and deletion with limited memory
+// deleting a previous node is easy in doubly list
+// doubly requires more memory and storage
 
 class DoublyNode {
   constructor(value) {
@@ -209,7 +229,7 @@ class DoublyLinkedList {
     this.head = newNode;
     this.length++;
     return this;
-  }  
+  }
   printList() {
     const array = [];
     let currentNode = this.head;
@@ -249,9 +269,9 @@ class DoublyLinkedList {
     if (index < 0 || index >= this.length) {
       return null; // Invalid index
     }
-  
+
     const nodeToRemove = this.traverseToIndex(index);
-  
+
     if (nodeToRemove.prev) {
       nodeToRemove.prev.next = nodeToRemove.next;
     } else {
@@ -262,18 +282,17 @@ class DoublyLinkedList {
         this.tail = null;
       }
     }
-  
+
     if (nodeToRemove.next) {
       nodeToRemove.next.prev = nodeToRemove.prev;
     } else {
       this.tail = nodeToRemove.prev;
     }
-  
+
     this.length--;
-  
+
     return this.printList();
   }
-  
 }
 
 const myDoublyLinkedList = new DoublyLinkedList(100);
@@ -282,5 +301,5 @@ myDoublyLinkedList.append(300);
 myDoublyLinkedList.prepend(400);
 myDoublyLinkedList.insert(2, 500);
 myDoublyLinkedList.remove(2);
-console.log(myDoublyLinkedList.printList());
-console.log(myDoublyLinkedList);
+//console.log(myDoublyLinkedList.printList());
+//console.log(myDoublyLinkedList);
