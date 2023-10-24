@@ -156,7 +156,7 @@ class LinkedList {
     const unwantedNode = leader.next;
     leader.next = unwantedNode.next;
     this.length--;
-    return this;
+    return this.printList();
   }
 }
 
@@ -166,4 +166,12 @@ myLinkedList.append(300);
 myLinkedList.prepend(400);
 myLinkedList.insert(2, 500);
 myLinkedList.remove(2);
-console.log(myLinkedList);
+console.log(myLinkedList.printList());
+
+// Doubly Linked Lists allow us to traverse backwards
+// You can start from the end and go backwards
+// Searching/Lookup can be a little faster
+// Because now you can pick where to start and go backwards
+// Lookup is still O(n) but technically its O(n/2)
+// Simplified it's still O(n) but its actually faster
+
